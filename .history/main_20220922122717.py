@@ -26,20 +26,20 @@ def colored(text, color):
 
 
 
-csgo_folder = "D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo/cfg"
+csgo_folder = "F:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo/cfg"
 config_site = "https://pastebin.com/raw/G8ALVzXe"
 name_of_config = 'sumss.cfg'
 
 # Get config from site
 config_request = requests.get(config_site)
-# Check if config is different from current config
-text = config_request.text
-
 
 # Get current config from csgo_filder if name_of_config exists
 if os.path.isfile(csgo_folder + '/' + name_of_config):
     with open(csgo_folder + '/' + name_of_config, 'r') as f:
         current_config = f.read()
+
+# Check if config is different from current config
+text = config_request.text.replace('\n', '')
 
 if text.splitlines() != current_config.splitlines():
     # Print the difference, removed text lines in red and added lines in green

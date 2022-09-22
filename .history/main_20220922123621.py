@@ -54,6 +54,6 @@ else:
     print('No changes', flush=True)
 
 
-# Save config to file
-with open(os.path.join(csgo_folder, name_of_config), 'w') as config_file:
-    config_file.write(text)
+# # Save config to file
+# with open(os.path.join(csgo_folder, name_of_config), 'w') as config_file:
+#     config_file.write(text)

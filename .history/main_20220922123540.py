@@ -33,7 +33,7 @@ name_of_config = 'sumss.cfg'
 # Get config from site
 config_request = requests.get(config_site)
 # Check if config is different from current config
-text = config_request.text
+text = config_request.text.replace('\n', '')
 
 
 # Get current config from csgo_filder if name_of_config exists
@@ -41,19 +41,25 @@ if os.path.isfile(csgo_folder + '/' + name_of_config):
     with open(csgo_folder + '/' + name_of_config, 'r') as f:
         current_config = f.read()
 
-if text.splitlines() != current_config.splitlines():
-    # Print the difference, removed text lines in red and added lines in green
-    for line in difflib.unified_diff(current_config.splitlines(), text.splitlines(), lineterm=''):
-        if line.startswith('-'):
-            print(colored(line, 'red'), flush=True)
-        elif line.startswith('+'):
-            print(colored(line, 'green'), flush=True)
-        else:
-            print(line)
-else:
-    print('No changes', flush=True)
+print(current_config)
 
 
-# Save config to file
-with open(os.path.join(csgo_folder, name_of_config), 'w') as config_file:
-    config_file.write(text)
+
+
+
+# if text.splitlines() != current_config.splitlines():
+#     # Print the difference, removed text lines in red and added lines in green
+#     for line in difflib.unified_diff(current_config.splitlines(), text.splitlines(), lineterm=''):
+#         if line.startswith('-'):
+#             print(colored(line, 'red'), flush=True)
+#         elif line.startswith('+'):
+#             print(colored(line, 'green'), flush=True)
+#         else:
+#             print(line)
+# else:
+#     print('No changes', flush=True)
+
+
+# # Save config to file
+# with open(os.path.join(csgo_folder, name_of_config), 'w') as config_file:
+#     config_file.write(text)
