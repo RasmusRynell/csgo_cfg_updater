@@ -25,9 +25,11 @@ def colored(text, color):
         return text
 
 
+
+csgo_folder = "D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo/cfg"
 csgo_folder = "C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg"
 config_site = "https://pastebin.com/raw/G8ALVzXe"
-name_of_config = 'sumss.cfg'
+name_of_config = 'test.cfg'
 
 # Get config from site
 config_request = requests.get(config_site)
@@ -37,7 +39,7 @@ text = config_request.text
 
 # Get current config from csgo_filder if name_of_config exists
 if os.path.isfile(csgo_folder + '/' + name_of_config):
-    with open(csgo_folder + '/' + name_of_config, 'r', newline='', encoding='utf-8') as f:
+    with open(csgo_folder + '/' + name_of_config, 'r') as f:
         current_config = f.read()
 
 if text.splitlines() != current_config.splitlines():
@@ -52,8 +54,8 @@ if text.splitlines() != current_config.splitlines():
 else:
     print('No changes', flush=True)
 
-print(text)
 
 # Save config to file
-with open(os.path.join(csgo_folder, name_of_config), 'w', newline='', encoding='utf-8') as config_file:
+with open(os.path.join(csgo_folder, name_of_config), 'w') as config_file:
+    text = text.replace("\n\n", "\n")
     config_file.write(text)

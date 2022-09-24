@@ -25,6 +25,8 @@ def colored(text, color):
         return text
 
 
+
+csgo_folder = "D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo/cfg"
 csgo_folder = "C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg"
 config_site = "https://pastebin.com/raw/G8ALVzXe"
 name_of_config = 'sumss.cfg'
