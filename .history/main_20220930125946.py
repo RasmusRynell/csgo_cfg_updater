@@ -31,7 +31,7 @@ csgo_folders = ["C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Gl
 config_site = "https://pastebin.com/raw/G8ALVzXe"
 name_of_config = 'sumss.cfg'
 write_to_auto_exec = True
-print_changes = True
+print_changes = False
 
 # Get config from site
 config_request = requests.get(config_site)
@@ -39,31 +39,33 @@ config_request = requests.get(config_site)
 text = config_request.text
 
 for csgo_folder in csgo_folders:
+    print(csgo_folder)
     # Get current config from csgo_filder if name_of_config exists
     if os.path.isfile(csgo_folder + '/' + name_of_config):
         with open(csgo_folder + '/' + name_of_config, 'r', encoding="utf8") as f:
             current_config = f.read()
 
-    if (print_changes):
-        if text.splitlines() != current_config.splitlines():
-            # Print the difference, removed text lines in red and added lines in green
-            for line in difflib.unified_diff(current_config.splitlines(), text.splitlines(), lineterm=''):
-                if line.startswith('-'):
-                    print(colored(line, 'red'), flush=True)
-                elif line.startswith('+'):
-                    print(colored(line, 'green'), flush=True)
-                else:
-                    print(line)
-        else:
-            print('No changes', flush=True)
+    # if (print_changes):
+    #     if text.splitlines() != current_config.splitlines():
+    #         # Print the difference, removed text lines in red and added lines in green
+    #         for line in difflib.unified_diff(current_config.splitlines(), text.splitlines(), lineterm=''):
+    #             if line.startswith('-'):
+    #                 print(colored(line, 'red'), flush=True)
+    #             elif line.startswith('+'):
+    #                 print(colored(line, 'green'), flush=True)
+    #             else:
+    #                 print(line)
+    #     else:
+    #         print('No changes', flush=True)
 
-    # Save config to file
-    with open(os.path.join(csgo_folder, name_of_config), 'w', newline='', encoding='utf-8') as config_file:
-        config_file.write(text)
-        print("Wrote to file" + os.path.join(csgo_folder, name_of_config), flush=True)
+    # # Save config to file
+    # with open(os.path.join(csgo_folder, name_of_config), 'w', newline='', encoding='utf-8') as config_file:
+    #     config_file.write(text)
+    #     print("Wrote to file" + os.path.join(csgo_folder, name_of_config), flush=True)
 
-    # Save config to autoexec.cfg
-    if write_to_auto_exec:
-        with open(os.path.join(csgo_folder, 'autoexec.cfg'), 'w', newline='', encoding='utf-8') as autoexec_file:
-            autoexec_file.write(text)
-            print("Wrote to (autoexec): " + os.path.join(csgo_folder, 'autoexec.cfg'), flush=True)
+    # # Save config to autoexec.cfg
+    # if write_to_auto_exec:
+    #     with open(os.path.join(csgo_folder, 'autoexec.cfg'), 'w', newline='', encoding='utf-8') as autoexec_file:
+    #         autoexec_file.write(text)
+    #         print("Wrote to (autoexec): " + os.path.join(csgo_folder, 'autoexec.cfg'), flush=True)
+    print("Done with csgo_folder", flush=True)

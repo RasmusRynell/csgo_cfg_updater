@@ -31,7 +31,7 @@ csgo_folders = ["C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Gl
 config_site = "https://pastebin.com/raw/G8ALVzXe"
 name_of_config = 'sumss.cfg'
 write_to_auto_exec = True
-print_changes = True
+print_changes = False
 
 # Get config from site
 config_request = requests.get(config_site)
@@ -41,7 +41,8 @@ text = config_request.text
 for csgo_folder in csgo_folders:
     # Get current config from csgo_filder if name_of_config exists
     if os.path.isfile(csgo_folder + '/' + name_of_config):
-        with open(csgo_folder + '/' + name_of_config, 'r', encoding="utf8") as f:
+        with open(csgo_folder + '/' + name_of_config, 'r', newline='', encoding='utf-8') as f:
+            print("Reading from " + csgo_folder + '/' + name_of_config)
             current_config = f.read()
 
     if (print_changes):
